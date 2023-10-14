@@ -14,7 +14,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const mongodb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.pq3rhn5.mongodb.net/message-board`;
+const mongodb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.pq3rhn5.mongodb.net/message-board?retryWrites=true&w=majority`;
 mongoose.connect(mongodb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
