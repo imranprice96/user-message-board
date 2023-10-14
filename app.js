@@ -11,7 +11,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 const Schema = mongoose.Schema;
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const mongodb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.pq3rhn5.mongodb.net/message-board?retryWrites=true&w=majority`;

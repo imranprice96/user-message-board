@@ -1,8 +1,35 @@
 body {
+  display: flex;
+  flex-direction: column;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #ddd;
+  width: 500px;
+  max-width: 75%;
+  border-radius: .5rem;
+}
+
+
+.form-container input{
+  margin-bottom: 0.5rem;
+}
+
+.error-container{
+  padding: 1rem;
+  list-style: none;
+}
+
+.error{
+  color: red;
+  margin-bottom: .25rem;
 }

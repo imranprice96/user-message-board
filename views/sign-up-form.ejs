@@ -3,25 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Message Board</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  <h1>Sign Up</h1>
-  <form action="" method="POST">
-    
-    <label for="firstName">First name</label>
-    <input name="firstName" placeholder="first name" type="text" />
+  <h1><a href="/">Home/</a>Sign Up</h1>
+  <form action="" method="POST" class="form-container">
 
-    <label for="lastName">Last Name</label>
-    <input name="lastName" placeholder="last name" type="text" />
+    <label for="first_name">First name</label>
+    <input name="first_name"  type="text" />
+
+    <label for="last_name">Last Name</label>
+    <input name="last_name"  type="text" />
 
     <label for="username">Username</label>
-    <input name="username" placeholder="username" type="text" />
+    <input name="username"  type="text" />
 
     <label for="password">Password</label>
-    <input name="password" type="password" />
+    <input name="password" type="password"  placeholder="at least 4 characters" />
 
     <button>Sign Up</button>
 
   </form>
+<% if (errors) { %>
+    <ul class="error-container">
+        <% for( let index = 0; index < errors.length; index++ ) { %>
+            <li class="error">Error: <%= errors[index].msg %></li>
+        <% } %>
+    </ul>
+    
+<% } %>
+
+
 </body>
 </html>

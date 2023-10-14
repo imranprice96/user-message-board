@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 
 // Handle sign up on GET
 exports.user_sign_up_get = asyncHandler(async (req, res, next) => {
-  res.render("sign-up-form", { title: "Sign up" });
+  res.render("sign-up-form", { title: "Sign up", errors: [] });
 });
 
 // Handle sign up on POST.
@@ -30,7 +30,6 @@ exports.user_sign_up_post = [
     .isLength({ min: 4 })
     .escape()
     .withMessage("Password must be at least 4 characters."),
-  body("membership_status").isBoolean().escape(),
 
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
@@ -43,8 +42,10 @@ exports.user_sign_up_post = [
       last_name: req.body.last_name,
       username: req.body.username,
       password: req.body.password,
-      membership_status: req.body.membership_status,
+      membership_status: false,
     });
+    console.log(user);
+    console.log(errors);
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values/errors messages.
@@ -61,7 +62,7 @@ exports.user_sign_up_post = [
       await user.save();
       // TODO ******************
       // Redirect to messages.
-      res.redirect(user.url);
+      res.redirect("/");
     }
   }),
 ];
