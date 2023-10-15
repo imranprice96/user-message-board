@@ -5,7 +5,7 @@ const user_controller = require("../controllers/userController");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index");
+  res.render("index", { user: req.user });
 });
 
 // Get messages page

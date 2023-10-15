@@ -6,8 +6,27 @@
   </head>
   <body>
     <h1>Home</h1>
-    <button>Login</button>
-    <button><a href="/sign-up">Sign up</a></button>
-    <button><a href="/messages">Messages test</a></button>
+    <% if (user) { %>
+     <h2>Welcome back <%= user.username %></h2>
+     <a href="/log-out">Log out</a>
+     <div>
+      <a href="/messages">Messages</a>
+    </div>
+    <% } else { %>
+      <div>
+        <form action="/log-in" method="POST" class="form-container">
+
+          <label for="username">Username</label>
+          <input name="username"  type="text" />
+      
+          <label for="password">Password</label>
+          <input name="password" type="password"  />
+      
+          <button>Log in</button>
+        </form>
+        <p>Not a member? <a href="/sign-up">Sign up</a>   </p>
+      </div>
+    
+    <%}%>
   </body>
 </html>

@@ -30,6 +30,9 @@ exports.user_sign_up_post = [
     .isLength({ min: 4 })
     .escape()
     .withMessage("Password must be at least 4 characters."),
+  body("confirm_password")
+    .custom((value, { req }) => value === req.body.password)
+    .withMessage("The passwords do not match"),
 
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
