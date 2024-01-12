@@ -39,7 +39,6 @@ exports.user_sign_up_post = [
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
-    // Create Department object with escaped and trimmed data
     const user = new User({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -61,7 +60,6 @@ exports.user_sign_up_post = [
     } else {
       // Data from form is valid.
 
-      // Save department.
       await user.save();
       // TODO ******************
       // Redirect to messages.

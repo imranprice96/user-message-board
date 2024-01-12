@@ -33,3 +33,19 @@ a {
   color: red;
   margin-bottom: .25rem;
 }
+
+li{
+  padding: 1rem;
+  list-style: none;
+  border:1px solid black;
+  border-radius: 1rem;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3{
+  margin: 0;
+}
