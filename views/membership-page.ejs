@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <h1><a href="/">Home</a></h1>
+    <div>
+        <p><%= user.username %> join the club by entering the secret passcode.</p>
+        <form action="" method="POST" class="form-container">
+    
+        <label for="passcode">Passcode:</label>
+        <input name="passcode" type="password" />
+
+        <input type="hidden" name="userid" value="<%= user._id%>"/>
+    
+        <button>Enter</button>
+    
+      </form>
+    </div>
+    
+</body>
+</html>

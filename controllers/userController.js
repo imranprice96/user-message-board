@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+require("dotenv").config();
 
 // Handle sign up on GET
 exports.user_sign_up_get = asyncHandler(async (req, res, next) => {
@@ -46,8 +47,8 @@ exports.user_sign_up_post = [
       password: req.body.password,
       membership_status: false,
     });
-    console.log(user);
-    console.log(errors);
+    //console.log(user);
+    //console.log(errors);
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values/errors messages.
@@ -65,5 +66,47 @@ exports.user_sign_up_post = [
       // Redirect to messages.
       res.redirect("/");
     }
+  }),
+];
+
+// Handle membership on GET
+exports.user_membership_get = asyncHandler(async (req, res, next) => {
+  res.render("membership-page", { user: req.user });
+});
+
+// Handle membership on POST
+exports.user_membership_post = [
+  // Validate and sanitize fields.
+  body("Passcode")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Enter a passcode"),
+
+  // Process request after validation and sanitization.
+  asyncHandler(async (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    const user = await User.findById(req.user._id).exec();
+
+    if (user === null) {
+      res.redirect("/");
+    }
+
+    const updateUser = new User({
+      first_name: user.first_name,
+      last_name: user.last_name,
+      username: user.username,
+      password: user.password,
+      membership_status: true,
+      _id: req.user._id,
+    });
+
+    if (req.body.passcode == "apples" /* process.env.PASSCODE*/) {
+      console.log("Match");
+      await User.findByIdAndUpdate(req.user._id, updateUser, {});
+    }
+    res.redirect("/");
   }),
 ];
