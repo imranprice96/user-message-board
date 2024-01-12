@@ -2,6 +2,7 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 require("dotenv").config();
+const bcrypt = require("bcryptjs");
 
 // Handle sign up on GET
 exports.user_sign_up_get = asyncHandler(async (req, res, next) => {
@@ -40,13 +41,6 @@ exports.user_sign_up_post = [
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
-    const user = new User({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      username: req.body.username,
-      password: req.body.password,
-      membership_status: false,
-    });
     //console.log(user);
     //console.log(errors);
 
@@ -59,12 +53,18 @@ exports.user_sign_up_post = [
       });
       return;
     } else {
-      // Data from form is valid.
-
-      await user.save();
-      // TODO ******************
-      // Redirect to messages.
-      res.redirect("/");
+      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+        const user = new User({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          username: req.body.username,
+          password: hashedPassword,
+          membership_status: false,
+          isAdmin: false,
+        });
+        await user.save();
+        res.redirect("/");
+      });
     }
   }),
 ];

@@ -28,4 +28,10 @@ router.get("/membership", user_controller.user_membership_get);
 // Post membership page
 router.post("/membership", user_controller.user_membership_post);
 
+// Get create message pagge
+router.get("/message", messsage_controller.message_create_get);
+
+// Post create message page
+router.post("/message", messsage_controller.message_create_post);
+
 module.exports = router;

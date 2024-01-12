@@ -12,7 +12,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 const Schema = mongoose.Schema;
-//const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const mongodb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.pq3rhn5.mongodb.net/message-board?retryWrites=true&w=majority`;
@@ -42,7 +42,8 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password !== password) {
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
         return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);

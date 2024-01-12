@@ -11,6 +11,7 @@
      <% if (user.membership_status) { %>
         <p>(member)</p>
       <%}%>
+    <a href="/message">Create message</a>
      <a href="/log-out">Log out</a>
      <% if (!user.membership_status) { %>
       <a href="/membership">Become a member</a>
@@ -42,11 +43,13 @@
               <p><%= message.text %></p>
               <% if (user) { %>
                 <% if (user.membership_status) { %>
-                  <em>Author: <%=user.username %></em>
+                  <em>Author: <%=message.user.username %></em>
                 <%}else{ %>
                   <p><em>Author hidden, become a member</em></p>
                 <%}%>
-              <%}%>
+                <%}else{ %>
+                  <p><em>Author hidden, become a member</em></p>
+                <%}%>
             </li>
         <% }) %>
     </ul>
