@@ -43,13 +43,20 @@
               <p><%= message.text %></p>
               <% if (user) { %>
                 <% if (user.membership_status) { %>
-                  <em>Author: <%=message.user.username %></em>
+                  <div class="author">
+                    <em>Author: <%=message.user.username %></em>
+                    <p id="timestamp"><%= message.createdAt%></p>
+                  </div>
+                  
                 <%}else{ %>
                   <p><em>Author hidden, become a member</em></p>
                 <%}%>
-                <%}else{ %>
-                  <p><em>Author hidden, become a member</em></p>
+                <% if (user.isAdmin || message.user._id.toString() == user._id.toString()) {%>
+                  <a href="<%=message.url+'/delete'%>">Delete</a>
                 <%}%>
+              <%}else{ %>
+                <p><em>Author hidden, become a member</em></p>
+              <%}%>
             </li>
         <% }) %>
     </ul>

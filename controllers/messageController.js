@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 
 // Display all messages
 exports.message_list = asyncHandler(async (req, res, next) => {
-  const messages = await Message.find({}, "title text user")
+  const messages = await Message.find({}, "title text user createdAt")
     .sort({ timeStamp: 1 })
     .populate("user")
     .exec();
@@ -64,3 +64,35 @@ exports.message_create_post = [
     }
   }),
 ];
+
+// Display message delete form on GET.
+exports.message_delete_get = asyncHandler(async (req, res, next) => {
+  const message = await Message.findById(req.params.id).exec();
+
+  console.log(message + "*******");
+  if (message === null) {
+    // No results.
+    res.redirect("/");
+  }
+  res.render("delete", {
+    message: message,
+  });
+});
+
+// Handle Message delete on POST.
+exports.message_delete_post = asyncHandler(async (req, res, next) => {
+  const message = await Message.findById(req.params.id).exec();
+  if (message === null) {
+    // No results.
+    res.redirect("/");
+  }
+
+  await Message.findByIdAndRemove(req.body.messageid);
+  res.redirect("/");
+});
+
+// TODO add message delete for current user and admin or just admin only for simplicity
+// Maybe conditionally add delete button if admin or same user
+
+// TODO tidy things up and make the css look good
+// Update readmes on this and inventory app

@@ -11,11 +11,9 @@ const MessageSchema = new Schema(
   { timestamps: true }
 );
 
-/*
 // Virtual for message URL
 MessageSchema.virtual("url").get(function () {
-  return `/message/${this._id}`;
+  return `/${this._id}`;
 });
-*/
 
 module.exports = mongoose.model("Message", MessageSchema);
