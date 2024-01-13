@@ -49,3 +49,34 @@ ul{
 h1, h2, h3{
   margin: 0;
 }
+
+.author{
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+  text-align: end;
+}
+
+.author p{
+  margin: 0;
+}
+
+#delete{
+  display: flex;
+  justify-content: end;
+}
+
+#delete a{
+  color: red;
+  text-decoration: none;
+}
+
+#delete a:hover{
+  text-decoration: underline;
+}
+
+.messages li{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}

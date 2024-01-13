@@ -7,10 +7,9 @@
   <body>
     <h1>Home</h1>
     <% if (user) { %>
-     <h2>Welcome back <%= user.username %></h2>
-     <% if (user.membership_status) { %>
-        <p>(member)</p>
-      <%}%>
+     <h2>Welcome back <%= user.username %><% if (user.membership_status) { %>
+      (member)
+    <%}%></h2>
     <a href="/message">Create message</a>
      <a href="/log-out">Log out</a>
      <% if (!user.membership_status) { %>
@@ -34,8 +33,7 @@
       </div>
     
     <%}%>
-    <div>
-      <h2><%= message_list.title %></h2>
+    <div class="messages">
       <ul>
         <% message_list.forEach(function(message){ %>
             <li>
@@ -44,18 +42,23 @@
               <% if (user) { %>
                 <% if (user.membership_status) { %>
                   <div class="author">
-                    <em>Author: <%=message.user.username %></em>
+                    <p>Author: <%=message.user.username %></p>
                     <p id="timestamp"><%= message.createdAt%></p>
                   </div>
-                  
                 <%}else{ %>
-                  <p><em>Author hidden, become a member</em></p>
+                  <div class="author">
+                    <p>Author hidden, become a member</p>
+                  </div>
                 <%}%>
                 <% if (user.isAdmin || message.user._id.toString() == user._id.toString()) {%>
-                  <a href="<%=message.url+'/delete'%>">Delete</a>
+                  <div id="delete">
+                    <a href="<%=message.url+'/delete'%>">Delete</a>
+                  </div>
                 <%}%>
               <%}else{ %>
-                <p><em>Author hidden, become a member</em></p>
+                <div class="author">
+                  <p>Author hidden, become a member</p>
+                </div>
               <%}%>
             </li>
         <% }) %>

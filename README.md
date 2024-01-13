@@ -1,2 +1,11 @@
 # user-message-board
-message board with user sign up
+
+Message board with user sign up made with nodejs (express) and mongoosedb
+The goal was to demonstrate the use of user authentication using passportJS and bcrypt
+
+# features
+
+- home page displays all messages from the database
+- users can sign up and create messages of there own
+- users can become a member by entering the secret passcode ('apples' for testing) which allows them to view the author and timestamp of each message.
+- the creator or a user with admin can delete messages
