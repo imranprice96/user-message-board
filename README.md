@@ -1,6 +1,6 @@
 # user-message-board
 
-Message board with user sign up made with nodejs (express) and mongoosedb
+Message board with user sign up made with nodejs and mongodb using express and mongoose.
 The goal was to demonstrate the use of user authentication using passportJS and bcrypt
 
 # features
